@@ -15,12 +15,15 @@ import org.w3c.dom.Document;
 import com.cdy.utility.Converter;
 import com.cdy.utility.HttpWebCall;
 import com.cdy.utility.PropertiesParser;
+import org.jose4j.json.internal.json_simple.parser.ParseException;
+import org.json.Property;
 
 public class Generic <InputDataType, OutputDataType>
 {   
   InputPayload inputPayload;
     Gson gson;
     Converter converter;
+    Property jsontoPropertyConverter;
 
   public Generic()
   {
@@ -33,10 +36,9 @@ public class Generic <InputDataType, OutputDataType>
     Properties properties = new Properties();
 
     @SuppressWarnings("unchecked")
-    public OutputDataType GenericUserExitTrigger(String UserExitName, InputDataType inputDataType, OutputDataType outputDataType) throws IllegalArgumentException, IllegalAccessException, IOException, NoSuchFieldException, SecurityException 
+    public OutputDataType GenericUserExitTrigger(String UserExitName, InputDataType inputDataType, OutputDataType outputDataType) throws IllegalArgumentException, IllegalAccessException, IOException, NoSuchFieldException, SecurityException, ParseException 
     {
         String structtype;
-        System.out.println("Debugger 1");
         structtype = inputDataType.getClass().getName();
         System.out.println(structtype);
         switch(structtype)
@@ -53,10 +55,13 @@ public class Generic <InputDataType, OutputDataType>
             case "com.yantra.yfs.japi.YFSExtnPaymentCollectionInputStruct":
             {
               PropertiesParser <InputDataType, OutputDataType> propertyParser = new PropertiesParser<InputDataType, OutputDataType>();
-              Properties prop = propertyParser.AutomateProperties(inputDataType);
-              System.out.println(new Date()+": User exit input data: " +prop);
-              Properties retprop = this.UserExitInvoke(UserExitName, prop); 
-              OutputDataType retval =  propertyParser.AutomateOutputResult(outputDataType, retprop);
+              String prop = propertyParser.AutomateProperties(inputDataType);
+              System.out.println("User Exit Data: "+ prop.toString());
+              String retData = this.UserExitInvoke(UserExitName, prop);
+              retData = retData.replaceAll(" ", "\n");
+              Properties retProp = new Properties();
+              retProp.load(new StringReader(retData));
+              OutputDataType retval =  propertyParser.AutomateOutputResult(outputDataType, retProp);
               return retval;
 
             }
@@ -79,24 +84,4 @@ public class Generic <InputDataType, OutputDataType>
         return retval;   
     }
 
-    public Properties UserExitInvoke(String UserExitName, Properties props) throws IOException
-    {
-    
-
-      SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmmss");  
-      Date date = new Date(); 
-        inputPayload.requestId=formatter.format(date);
-        inputPayload.methodIdentifier=UserExitName;
-        inputPayload.inputPayload=props.toString();
-        System.out.println(new Date()+ ": Remote User Exit Triggered for "+ UserExitName);
-        String retval = new HttpWebCall().httpWebRequest(gson.toJson(inputPayload));
-        retval = retval.replaceAll(" ", "\n");
-        System.out.println(retval.toString());
-        Properties properties = new Properties() ;
-        properties.load(new StringReader(retval));
-        return properties;
-       
-    }
-    
-    
 }

@@ -15,7 +15,14 @@ public class YFSCollectionCreditCardUE_Impl implements YFSCollectionCreditCardUE
     {
        
         try {
-            return (YFSExtnPaymentCollectionOutputStruct) new Generic<YFSExtnPaymentCollectionInputStruct, YFSExtnPaymentCollectionOutputStruct>().GenericUserExitTrigger("YFSCollectionCreditCardUE", arg1, new YFSExtnPaymentCollectionOutputStruct());
+           YFSExtnPaymentCollectionOutputStruct output = (YFSExtnPaymentCollectionOutputStruct) new Generic<YFSExtnPaymentCollectionInputStruct, YFSExtnPaymentCollectionOutputStruct>().GenericUserExitTrigger("YFSCollectionCreditCardUE", arg1, new YFSExtnPaymentCollectionOutputStruct());
+           System.out.println(output.authorizationId);
+           System.out.println(output.authorizationAmount);
+           System.out.println(output.authorizationExpirationDate);
+           System.out.println(output.tranAmount);
+           System.out.println(output.tranType);
+           return output;
+           
         } catch (Exception e) 
         {
           

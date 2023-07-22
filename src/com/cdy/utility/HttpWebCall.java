@@ -7,6 +7,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Date;
 
+import com.yantra.yfs.core.YFSSystem;
 
 public class HttpWebCall 
 {
@@ -16,8 +17,9 @@ public class HttpWebCall
 
   public HttpWebCall()
     {
-   //   url = "http://localhost:8080/InvokeUserExit";
-        url = "http://host.docker.internal:8080/InvokeUserExit";
+      // url = "http://9.202.178.34:8080/InvokeUserExit";
+      // url = "http://host.docker.internal:8080/InvokeUserExit";
+      url = YFSSystem.getProperty("UE.UEServerHost");
        
     }
 

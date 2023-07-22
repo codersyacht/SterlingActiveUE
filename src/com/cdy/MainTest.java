@@ -1,19 +1,14 @@
 package com.cdy;
-
 import java.io.IOException;
-
-import org.w3c.dom.Document;
-
-import com.cdy.userexit.Generic;
-import com.cdy.utility.Converter;
-import com.cdy.utility.UtilityFileProcess;
+import com.cdy.userexit.payments.YFSCollectionCreditCardUE_Impl;
+import com.yantra.yfs.japi.YFSExtnPaymentCollectionInputStruct;
 import com.yantra.yfs.japi.YFSUserExitException;
 
 public class MainTest 
 {
     public static void main(String args[]) throws YFSUserExitException, IllegalArgumentException, IllegalAccessException, NoSuchFieldException, SecurityException, IOException
     {
-        Document inDoc = null;
+    /*     Document inDoc = null;
         Converter converter = new Converter();
         UtilityFileProcess utilityfileprocess = new UtilityFileProcess();
         try {
@@ -29,6 +24,12 @@ public class MainTest
     Generic<Document, Document> generic = new Generic<Document, Document>();
     Document outDoc = generic.GenericUserExitTrigger("YFSBeforeCreateOrderUE", inDoc, inDoc);
     System.out.println(converter.DoctoStringConverter(outDoc));
+    */
+YFSCollectionCreditCardUE_Impl test  = new YFSCollectionCreditCardUE_Impl();
+
+test.collectionCreditCard(null, new YFSExtnPaymentCollectionInputStruct());
+
+
     }
     
 }

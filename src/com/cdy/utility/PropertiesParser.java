@@ -11,7 +11,7 @@ public class PropertiesParser <InputDataType, OutputDataType>
     { 
      Converter converter = new Converter();
       for (Object key: retprops.keySet()) {
-        System.out.println(key.toString() + ": " + retprops.getProperty(key.toString()));
+
        
         String datatype = outputDataType.getClass().getDeclaredField(key.toString()).getType().getName();
         switch (datatype)
@@ -48,9 +48,10 @@ public class PropertiesParser <InputDataType, OutputDataType>
          
     }
 
-    public Properties AutomateProperties(InputDataType inputDataType) throws IllegalArgumentException, IllegalAccessException
+    public String AutomateProperties(InputDataType inputDataType) throws IllegalArgumentException, IllegalAccessException
     {
-      Properties properties = new Properties();
+   //   Properties properties = new Properties();
+        String properties="";
                 
       Field[] fields = inputDataType.getClass().getFields();
       for (int i=0; i< fields.length; i++)
@@ -63,19 +64,23 @@ public class PropertiesParser <InputDataType, OutputDataType>
             case "java.lang.String":
             {
                if (fieldvalue !=null)
-                 properties.setProperty(fields[i].getName(), (String) fieldvalue);
+       //          properties.setProperty(fields[i].getName(), (String) fieldvalue);
+                   properties = properties+fields[i].getName()+"="+(String) fieldvalue +" ";
+                
             break;
             }
             case "double":
             {
               if (fieldvalue !=null)
-              properties.setProperty(fields[i].getName(), String.valueOf((Double) fieldvalue));
+      //        properties.setProperty(fields[i].getName(), String.valueOf((Double) fieldvalue));
+                properties = properties+fields[i].getName()+"="+(Double) fieldvalue +" ";
                 break;
             }
             case "boolean":
             {
               if (fieldvalue !=null)
-              properties.setProperty(fields[i].getName(), String.valueOf((boolean) fieldvalue));
+     //         properties.setProperty(fields[i].getName(), String.valueOf((boolean) fieldvalue));
+                properties = properties+fields[i].getName()+"="+(boolean) fieldvalue +" ";
               break;
             }
             case "org.w3c.dom.Document":
@@ -87,18 +92,22 @@ public class PropertiesParser <InputDataType, OutputDataType>
                    doc = converter.DoctoStringConverter((Document)fieldvalue);
                 }
                    if (doc !=null)
-                    properties.setProperty(fields[i].getName(), doc);
+       //             properties.setProperty(fields[i].getName(), doc);
+      
+                      properties = properties+fields[i].getName()+"="+ doc +" ";
                    break;
                 
             }
             case "java.util.Date":
             {
               if (fieldvalue !=null)
-              properties.setProperty(fields[i].getName(), String.valueOf((Date) fieldvalue));
+         //     properties.setProperty(fields[i].getName(), String.valueOf((Date) fieldvalue));
+                 properties = properties+fields[i].getName()+"="+(Date) fieldvalue +" ";
               break;
             }
 
         }
+       
        
       }
 
