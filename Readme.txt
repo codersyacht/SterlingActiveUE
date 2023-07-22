@@ -1,4 +1,4 @@
-**Instruction:**
+** Instruction: **
 
 Set the property at Sterling Order Management:
 
