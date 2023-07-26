@@ -15,5 +15,5 @@ Set the property at Sterling Order Management:
 
 Or
 
-    yfs.UE.UEServerHost = http://9.30.251.195:8080/InvokeUserExit
+    yfs.UE.UEServerHost = http://9.30.183.110:8080/InvokeUserExit
 
