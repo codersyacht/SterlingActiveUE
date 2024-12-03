@@ -7,6 +7,7 @@ import org.w3c.dom.Document;
 
 public class PropertiesParser <InputDataType, OutputDataType>
 {
+    @SuppressWarnings("deprecation")
     public OutputDataType AutomateOutputResult (OutputDataType outputDataType, Properties retprops) throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException
     { 
      Converter converter = new Converter();
