@@ -1,9 +1,7 @@
 package com.cdy.entity;
 
-
 public class OutputPayload 
 {
-   public String requestId;
-   public String outputPayload;
-    
+  public String requestId;  
+  public String outputPayload;
 }
