@@ -8,8 +8,9 @@ import com.yantra.yfs.japi.YFSUserExitException;
 import com.yantra.yfs.japi.ue.YFSCollectionCreditCardUE;
 
 public class YFSCollectionCreditCardUE_Impl implements YFSCollectionCreditCardUE {
-   @SuppressWarnings({ "rawtypes", "unchecked" })
-public YFSExtnPaymentCollectionOutputStruct collectionCreditCard(YFSEnvironment arg0, YFSExtnPaymentCollectionInputStruct arg1) throws YFSUserExitException {
+@SuppressWarnings({ "rawtypes", "unchecked" })
+public YFSExtnPaymentCollectionOutputStruct collectionCreditCard(YFSEnvironment arg0, YFSExtnPaymentCollectionInputStruct arg1) throws YFSUserExitException 
+{
       try {
          YFSExtnPaymentCollectionOutputStruct output = (YFSExtnPaymentCollectionOutputStruct)(new Generic()).GenericUserExitTrigger("YFSCollectionCreditCardUE", arg1, new YFSExtnPaymentCollectionOutputStruct());
          return output;
